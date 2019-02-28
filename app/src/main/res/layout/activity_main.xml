@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.orangecoastcollege.cs273.todo2day.MainActivity">
+    tools:context="edu.miracosta.cs134.MainActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ConstraintLayout"
