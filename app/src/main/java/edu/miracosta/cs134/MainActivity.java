@@ -11,6 +11,14 @@ import java.util.List;
 import edu.miracosta.cs134.model.DBHelper;
 import edu.miracosta.cs134.model.Task;
 
+/**
+ * MainActivity that lets the user add tasks to the database and displays them. The user can clear
+ * the tasks and/or mark them as done too
+ *
+ * @author Dennis La
+ * @version 1.0
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
 
@@ -21,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView mTaskListview;
     private TaskListAdapter mTaskListAdapter;
 
+    /**
+     * inflates the layouts
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * method triggered when the user clicks the add task button. it will add the task to the
+     * database
+     * @param v the add task button
+     */
     //addTask
     public void addTask(View v)
     {
@@ -59,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     //ctrl + o => override
+
+    /**
+     * destroys the app when it is closed
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

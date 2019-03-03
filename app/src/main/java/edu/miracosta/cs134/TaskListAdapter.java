@@ -11,6 +11,12 @@ import java.util.List;
 
 import edu.miracosta.cs134.model.Task;
 
+/**
+ * Adapter class that will inflate the custom list view for the tasks
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class TaskListAdapter extends ArrayAdapter<Task>
 {
     private Context mContext;
@@ -18,6 +24,12 @@ public class TaskListAdapter extends ArrayAdapter<Task>
     private List<Task> mAllTasks;
 
 
+    /**
+     * constructor
+     * @param context where the adapter will be used
+     * @param resource the layout it will use
+     * @param objects the list of tasks
+     */
     public TaskListAdapter( Context context, int resource, List<Task> objects) {
         super(context, resource, objects);
 
@@ -31,6 +43,13 @@ public class TaskListAdapter extends ArrayAdapter<Task>
 
     //override the getView method
 
+    /**
+     * inflates the custom view layouts for the list view
+     * @param position position of the list view item
+     * @param convertView
+     * @param parent parent view of the list view
+     * @return the custom list view item
+     */
     @Override
     public View getView(int position,  View convertView, ViewGroup parent) {
 

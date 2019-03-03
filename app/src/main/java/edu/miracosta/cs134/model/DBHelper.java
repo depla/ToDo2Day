@@ -10,6 +10,14 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Class that helps manage te SQL database
+ *
+ * @author Dennis La
+ * @version 1.0
+ *
+ */
 public class DBHelper extends SQLiteOpenHelper
 {
     public static final String TAG = DBHelper.class.getSimpleName();
@@ -23,7 +31,10 @@ public class DBHelper extends SQLiteOpenHelper
     public static final String FIELD_IS_DONE = "is_Done";
 
 
-
+    /**
+     * constructor
+     * @param context where this class will be utilized
+     */
     public DBHelper(Context context)
     {
         super(context, DATABASE_NAME, null, 1);
@@ -33,6 +44,10 @@ public class DBHelper extends SQLiteOpenHelper
     }
 
 
+    /**
+     * creates a table for the database
+     * @param db the database
+     */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
@@ -60,6 +75,10 @@ public class DBHelper extends SQLiteOpenHelper
     }
 
 
+    /**
+     * adds the task information to the table
+     * @param task the task to be added
+     */
     //method to add a task to the database
     //corresponds to an insert operation
     public void addTask(Task task)
@@ -89,6 +108,10 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
+    /**
+     * method to retrieve a list of all the tasks in the database
+     * @return the list of all the tasks in the database
+     */
     //method to get all the tasks existing in the database
     public List<Task> getAllTasks()
     {
@@ -138,6 +161,9 @@ public class DBHelper extends SQLiteOpenHelper
     }
 
 
+    /**
+     * clears all the tasks in the table but not delete the table
+     */
     public void clearAllTasks()
     {
         SQLiteDatabase db = getWritableDatabase();
