@@ -1,10 +1,12 @@
 package edu.miracosta.cs134;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,7 +21,8 @@ import edu.miracosta.cs134.model.Task;
  * @version 1.0
  *
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
 
     private DBHelper mDb;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText mTaskEditText;
     private ListView mTaskListview;
+
     private TaskListAdapter mTaskListAdapter;
 
     /**
@@ -34,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
      * @param savedInstanceState
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -65,13 +70,55 @@ public class MainActivity extends AppCompatActivity {
     public void addTask(View v)
     {
         String description = mTaskEditText.getText().toString();
-        Task newTask = new Task(description);
 
-        //put the new task in the database
-        mDb.addTask(newTask);
+        if(description.length() == 0)
+        {
+            Toast.makeText(this, getString(R.string.toast), Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Task newTask = new Task(description);
 
-        //notify the list adapter that its changed
+            mAllTasks.add(newTask);
+
+            //put the new task in the database
+            mDb.addTask(newTask);
+
+            //notify the list adapter that its changed
+            mTaskListAdapter.notifyDataSetChanged();
+        }
+
+
+    }
+
+    /**
+     * method triggered by clear all tasks button, will remove all tasks from the list view
+     * @param v the clear all button
+     */
+    public void clearAllTasks(View v)
+    {
+        mAllTasks.clear();
+        mDb.clearAllTasks();
+
         mTaskListAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * updates the isDone boolean in the model and the database
+     *
+     * @param v the check box
+     */
+    public void changeTaskStatus(View v)
+    {
+        int pos = mTaskListview.getPositionForView(v);
+
+        mAllTasks.get(pos).setDone(!mAllTasks.get(pos).isDone());
+
+        mDb.updateTask(mAllTasks.get(pos));
+
+
+        mTaskListAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -86,4 +133,5 @@ public class MainActivity extends AppCompatActivity {
 
         mDb.close();
     }
+
 }

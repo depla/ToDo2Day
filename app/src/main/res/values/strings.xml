@@ -5,5 +5,6 @@
     <string name="task">Enter task description</string>
     <string name="delete">Clear all Tasks</string>
     <string name="desc">Description</string>
+    <string name="toast">Please enter a task.</string>
 
 </resources>

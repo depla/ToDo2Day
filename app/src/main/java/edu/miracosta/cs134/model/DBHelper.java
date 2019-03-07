@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper
         //create all of our data base tables
         // 1) Determine whether to read or write the database (CREATE = write)
         //opens a writeable connection to the todo2day database
-        db = getWritableDatabase();
+        //db = getWritableDatabase();
 
 
         String sql = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + "(" +  FIELD_PRIMARY_KEY
@@ -71,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper
 
 
 
-        db.close();
+       // db.close();
     }
 
 
@@ -106,6 +106,27 @@ public class DBHelper extends SQLiteOpenHelper
         db.close();
 
 
+    }
+
+    /**
+     * updates the boolean isDone for the task inside the database
+     *
+     * @param task the task that is changed
+     */
+    public void updateTask(Task task)
+    {
+        boolean isDone = task.isDone();
+
+        //ContentValues is a key/value mapping
+        ContentValues values = new ContentValues();
+        values.put(FIELD_IS_DONE, isDone ? 1 : 0);
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.update(DATABASE_TABLE, values, "_id = ?",
+                new String[] {String.valueOf(task.getId())});
+
+        db.close();
     }
 
     /**
@@ -159,6 +180,8 @@ public class DBHelper extends SQLiteOpenHelper
 
 
     }
+
+
 
 
     /**
